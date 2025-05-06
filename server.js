@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const taskRoutes = require('./routes/taskRoutes');
-// const authRoutes = require('./routes/authRoutes');
-// const auth = require('./middleware/authMiddleware');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,9 +11,9 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 
-// Public routes (remove auth middleware for now)
-app.use('/api/tasks', taskRoutes);
-// app.use('/api/auth', authRoutes); // will use later
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes); // Task routes added here
 
 // Health check
 app.get('/', (req, res) => {
